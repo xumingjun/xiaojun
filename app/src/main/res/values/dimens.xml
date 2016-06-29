@@ -9,6 +9,8 @@
     <dimen name="dp_48">48dp</dimen>
     <dimen name="dp_50">50dp</dimen>
     <dimen name="dp_60">60dp</dimen>
+    <dimen name="dp_80">80dp</dimen>
+    <dimen name="dp_100">100dp</dimen>
     <dimen name="dp_120">120dp</dimen>
     <dimen name="dp_140">140dp</dimen>
     <dimen name="dp_220">220dp</dimen>

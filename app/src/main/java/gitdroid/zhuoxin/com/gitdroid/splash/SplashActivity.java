@@ -9,7 +9,9 @@ import android.widget.Toast;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import gitdroid.zhuoxin.com.gitdroid.MainActivity;
 import gitdroid.zhuoxin.com.gitdroid.R;
+import gitdroid.zhuoxin.com.gitdroid.commons.ActivityUtils;
 
 /**
  * 首页面,第一次启动时进入的页面
@@ -19,10 +21,20 @@ public class SplashActivity extends AppCompatActivity {
     @Bind(R.id.btnLogin) Button btnLogin;
     @Bind(R.id.btnEnter) Button btnEnter;
 
+    private ActivityUtils activityUtils;
+
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_splash);
+
+    }
+
+    @Override
+    public void onContentChanged() {
+        super.onContentChanged();
         ButterKnife.bind(this);
+        activityUtils = new ActivityUtils(this);
     }
 
     @OnClick(R.id.btnLogin)
@@ -32,6 +44,6 @@ public class SplashActivity extends AppCompatActivity {
 
     @OnClick(R.id.btnEnter)
     public void enter() {
-        Toast.makeText(this, "enter", Toast.LENGTH_SHORT).show();
+        activityUtils.startActivity(MainActivity.class);
     }
 }

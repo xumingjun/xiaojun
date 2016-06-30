@@ -22,13 +22,13 @@ public class HotRepoFragment extends Fragment {
     //找控件
     @Bind(R.id.viewPager)ViewPager viewPager;
     @Bind(R.id.tabLayout)TabLayout tabLayout;
-    //
+    //常见适配器
     private HotRepoPagerAdapter adapter;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_hot_repo,container,false);
+        return inflater.inflate(R.layout.fragment_hot_repo,container,false);//绑定视图
     }
 
     @Override

@@ -15,16 +15,20 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import gitdroid.zhuoxin.com.gitdroid.R;
+import in.srain.cube.views.ptr.PtrClassicFrameLayout;
+import in.srain.cube.views.ptr.PtrDefaultHandler;
+import in.srain.cube.views.ptr.PtrFrameLayout;
 
 
 /**
  * Created by user on 2016/6/30.
  */
 public class RepoListFragment extends Fragment{
+    @Bind(R.id.ptrClassicFrameLayout)PtrClassicFrameLayout ptrFrameayoutL;
     @Bind(R.id.lvRepos)ListView listView;
     private ArrayAdapter<String> adapter;
     private List<String> datas = new ArrayList<String>();
-
+    private static int count;
 
     public static RepoListFragment getInstance(String language){
         RepoListFragment fragment = new RepoListFragment();
@@ -43,9 +47,7 @@ public class RepoListFragment extends Fragment{
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        for (int i= 1;i<=10;i++){
-            datas.add("我是第"+i+"条数据");
-        }
+
     }
 
     @Override
@@ -54,9 +56,46 @@ public class RepoListFragment extends Fragment{
         ButterKnife.bind(this,view);
         adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1);
         listView.setAdapter(adapter);
-        adapter.addAll(datas);
+
+
+        ptrFrameayoutL.setPtrHandler(new PtrDefaultHandler() {
+            @Override
+            public void onRefreshBegin(PtrFrameLayout frame) {
+                loadData(20);
+            }
+        });
     }
 
+    private  void  loadData(final int size){
+       new Thread(new Runnable() {
+           @Override
+           public void run() {
+               try {
+                   Thread.sleep(1000);
+                   datas.clear();
+                   for (int i= 1;i<=size;i++){
+                       count++;
+                       datas.add("我是第"+count+"条数据");
+                   }
+               } catch (InterruptedException e) {
+                   e.printStackTrace();
+               }
+
+               ptrFrameayoutL.post(new Runnable() {
+                   @Override
+                   public void run() {
+                       //添加刷新数据
+                       adapter.clear();
+                       adapter.addAll(datas);
+                       adapter.notifyDataSetChanged();
+                       //下拉刷新完成
+                       ptrFrameayoutL.refreshComplete();
+                   }
+               });
+
+           }
+       }).start();
+    };
     @Override
     public void onDestroy() {
         super.onDestroy();

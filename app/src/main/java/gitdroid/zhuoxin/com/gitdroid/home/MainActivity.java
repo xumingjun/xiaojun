@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //默认选中最热门
         menuItem = navigationView.getMenu().findItem(R.id.github_hot_repo);
         menuItem.setChecked(true);
+
         //默认显示最热门hotRepoFragment仓库
         hotRepoFragment = new HotRepoFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();

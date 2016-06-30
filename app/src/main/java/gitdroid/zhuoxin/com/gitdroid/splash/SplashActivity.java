@@ -1,7 +1,6 @@
 package gitdroid.zhuoxin.com.gitdroid.splash;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.Toast;
@@ -9,7 +8,7 @@ import android.widget.Toast;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import gitdroid.zhuoxin.com.gitdroid.MainActivity;
+import gitdroid.zhuoxin.com.gitdroid.home.MainActivity;
 import gitdroid.zhuoxin.com.gitdroid.R;
 import gitdroid.zhuoxin.com.gitdroid.commons.ActivityUtils;
 

@@ -1,6 +1,8 @@
-package gitdroid.zhuoxin.com.gitdroid;
+package gitdroid.zhuoxin.com.gitdroid.home;
 
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -12,6 +14,7 @@ import android.widget.GridLayout;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import gitdroid.zhuoxin.com.gitdroid.R;
 import gitdroid.zhuoxin.com.gitdroid.commons.ActivityUtils;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
@@ -24,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Bind(R.id.toolbar)Toolbar toolbar;
     private ActivityUtils activityUtils;
     private MenuItem menuItem;
+    private HotRepoFragment hotRepoFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +61,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //默认选中最热门
         menuItem = navigationView.getMenu().findItem(R.id.github_hot_repo);
         menuItem.setChecked(true);
+        //默认显示最热门hotRepoFragment仓库
+        hotRepoFragment = new HotRepoFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.container,hotRepoFragment);
+        transaction.commit();
+
     }
 
     @Override
